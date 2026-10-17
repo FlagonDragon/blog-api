@@ -1,4 +1,4 @@
-const db = require("../db/queries");
+import db from '../db/queries.js';
 
 function homeGet(req, res) {
 
@@ -16,7 +16,7 @@ async function infoGet(req, res) {
 
 
 
-module.exports = {
+export default {
     homeGet,
     infoGet
 };

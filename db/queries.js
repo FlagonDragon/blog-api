@@ -1,4 +1,4 @@
-const pool = require("./pool");
+import { pool } from './pool.js';
 
 async function getData() {
 
@@ -10,7 +10,7 @@ async function getData() {
 
 
 
-module.exports = { 
+export default { 
   getData 
 };
 

@@ -1,5 +1,5 @@
-const { Router } = require("express");
-const controller = require("../controllers/controller");
+import Router from 'express';
+import controller from '../controllers/controller.js';
 const router = Router();
 
 router.get("/", controller.homeGet);
@@ -8,4 +8,6 @@ router.get("/info", controller.infoGet);
 
 
 
-module.exports = router;
+export {
+    router
+};
