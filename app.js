@@ -10,22 +10,8 @@ app.use('/css',express.static('public' +'/css'));
 app.set("views", path.join(import.meta.dirname, "views"));
 app.set("view engine", "ejs");
 
-// Define allowed origins
-const allowedOrigins = ['http://http://localhost.com'];
-
-// CORS configuration
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
-
-// Apply CORS middleware
-app.use(cors(corsOptions));
+// Adds headers: Access-Control-Allow-Origin: *
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
