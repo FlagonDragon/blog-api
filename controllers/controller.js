@@ -38,10 +38,10 @@ async function infoGet(req, res) {
 
 };
 
-function usersGet(req, res) {
+async function usersGet(req, res) {
 
   return res.send(Object.values(users));
-
+  
 };
 
 function userIdGet(req, res) {
@@ -50,9 +50,13 @@ function userIdGet(req, res) {
 
 };
 
-function postsGet(req, res) {
+async function postsGet(req, res) {
 
-  return res.send(Object.values(users));
+  const posts = await db.getPosts();
+
+  console.log(posts);
+
+  return res.send(posts);
 
 };
 
