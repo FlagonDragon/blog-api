@@ -1,4 +1,5 @@
 import { pool } from './pool.js';
+import { prisma } from "../lib/prisma.js";
 
 async function getData() {
 
