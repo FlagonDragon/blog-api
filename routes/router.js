@@ -11,6 +11,7 @@ router.get('/users', controller.usersGet);
 router.get('/users/:userId', controller.userIdGet);
 
 router.get('/posts/', controller.postsGet);
+// https://blog-api-iv3t.onrender.com/posts
 
 router.get('/posts/:postId', controller.postIdGet);
 
