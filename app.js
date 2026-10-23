@@ -3,6 +3,8 @@ import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import jwtStrategy from "./strategies/jwt.js";
+import bcrypt from "bcryptjs";
+import db from './db/queries.js';
 
 passport.use(jwtStrategy);
 
@@ -22,21 +24,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", router);
 
-app.post("/login", (req, res) => {
-    let { email, password } = req.body;
-    //This lookup would normally be done using a database
-    if (email === "paul@nanosoft.co.za") {
-        if (password === "pass") { //the password compare would normally be done using bcrypt.
+app.post("/log-in", async (req, res) => {
+    let { username, password } = req.body;
+
+    const user = await db.getUser(username);
+
+    if (user != null && username === user.username) {
+        const match = await bcrypt.compare(password, user.password);
+        if (match) { 
             const opts = {}
             opts.expiresIn = 120;  //token expires in 2min
             const secret = "SECRET_KEY" //normally stored in process.env.secret
-            const token = jwt.sign({ email }, secret, opts);
+            const token = jwt.sign({ username }, secret, opts);
             return res.status(200).json({
                 message: "Auth Passed",
                 token
             })
         }
     }
+    
     return res.status(401).json({ message: "Auth Failed" })
 });
 
