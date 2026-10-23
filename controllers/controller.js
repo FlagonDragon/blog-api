@@ -1,4 +1,5 @@
 import db from '../db/queries.js';
+import bcrypt from "bcryptjs";
 
 let users = {
   1: {
@@ -66,11 +67,41 @@ function postIdGet(req, res) {
 
 };
 
+async function signUpPost(req, res) {
+
+  const { username, password } = req.body;
+
+  console.log('body: ');
+
+  console.log(req.body);
+
+  console.log(username, password);
+  
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  await db.createUser(username, hashedPassword);
+
+  res.redirect("/");
+
+  return res.send("all's well");
+
+};
+
+async function logInGet(req, res) {
+
+  const user = await db.getUser('hey');
+
+  return res.send(user);
+
+};
+
 export default {
     homeGet,
     infoGet,
     usersGet,
     userIdGet,
     postsGet,
-    postIdGet
+    postIdGet,
+    signUpPost,
+    logInGet
 };

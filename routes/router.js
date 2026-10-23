@@ -15,6 +15,10 @@ router.get('/posts/', controller.postsGet);
 
 router.get('/posts/:postId', controller.postIdGet);
 
+router.post('/sign-up', controller.signUpPost);
+
+router.get('/log-in', controller.logInGet);
+
 export {
     router
 };
