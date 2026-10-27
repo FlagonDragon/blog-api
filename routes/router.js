@@ -19,7 +19,9 @@ router.post('/sign-up', controller.signUpPost);
 
 router.get('/log-in', controller.logInGet);
 
-router.get('/createPost', controller.createPostPost);
+router.post('/createPost', controller.createPostPost);
+
+router.post('/createComment', controller.createCommentPost);
 
 
 

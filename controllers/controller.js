@@ -1,30 +1,6 @@
 import db from '../db/queries.js';
 import bcrypt from "bcryptjs";
 
-let users = {
-  1: {
-    id: '1',
-    username: 'Robin Wieruch',
-  },
-  2: {
-    id: '2',
-    username: 'Dave Davids',
-  },
-};
-
-let messages = {
-  1: {
-    id: '1',
-    text: 'Hello World',
-    userId: '1',
-  },
-  2: {
-    id: '2',
-    text: 'By World',
-    userId: '2',
-  },
-};
-
 function homeGet(req, res) {
 
     res.send('Homepage');
@@ -57,19 +33,15 @@ async function createPostPost(req, res) {
 
   try {
 
-    const { title, content, published, authorId } = req.body;
-
     await db.createPost(title, content, published, authorId);
+
+    return res.status(200);
 
   } catch(error) {
 
     return res.status(500).send(error);
 
   }
-
-  await db.createPost(title, content, published, authorId);
-
-  
 
 };
 
@@ -86,6 +58,24 @@ async function postsGet(req, res) {
 function postIdGet(req, res) {
 
   return res.send(users[req.params.userId]);
+
+};
+
+async function createCommentPost(req, res) {
+
+  const { content, authorId, postId } = req.body;
+
+  try {
+
+    await db.createPost(content, authorId, postId);
+
+    return res.status(200);
+
+  } catch(error) {
+
+    return res.status(500).send(error);
+
+  }
 
 };
 
@@ -128,6 +118,7 @@ export default {
     createPostPost,
     postsGet,
     postIdGet,
+    createCommentPost,
     signUpPost,
     logInGet,
 };
