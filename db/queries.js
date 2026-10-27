@@ -32,6 +32,19 @@ async function getUser(username) {
   
 }
 
+async function createPost(title, content) {
+
+  const post = await prisma.post.create({
+    data: {
+      title: `${title}`,
+      content: `${content}`,
+    },
+  });
+
+  console.log("Created post:", post);
+  
+}
+
 async function getPosts() {
 
   const posts = await prisma.post.findMany();
@@ -40,10 +53,25 @@ async function getPosts() {
   
 }
 
+async function createComment(title, content) {
+
+  const comment = await prisma.comment.create({
+    data: {
+      title: `${title}`,
+      content: `${content}`,
+    },
+  });
+
+  console.log("Created comment:", comment);
+  
+}
+
 export default {
   createUser,
   getUser,
   getData,
-  getPosts
+  createPost,
+  getPosts,
+  createComment
 };
 
