@@ -47,7 +47,7 @@ app.post("/log-in", async (req, res) => {
 });
 
 app.get("/protected", passport.authenticate('jwt', { session: false }), (req, res) => {
-    return res.status(200).send("YAY! this is a protected Route")
+    return res.status(200).json({ message: "Accessed protected route succesfully!" })
 })
 
 const PORT = process.env.PORT || 3000;
