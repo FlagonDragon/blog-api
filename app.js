@@ -36,11 +36,10 @@ app.post("/log-in", async (req, res) => {
             opts.expiresIn = 120;  //token expires in 2min
             const secret = "SECRET_KEY" //normally stored in process.env.secret
             const token = jwt.sign({ username }, secret, opts);
-            return res.send(token);
-            // return res.status(200).json({
-            //     message: "Auth Passed",
-            //     token
-            // })
+            return res.status(200).json({
+                message: "Auth Passed",
+                token
+            })
         }
     }
     
