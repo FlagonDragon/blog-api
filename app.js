@@ -38,6 +38,7 @@ app.post("/log-in", async (req, res) => {
             const token = jwt.sign({ username }, secret, opts);
             return res.status(200).json({
                 message: "Auth Passed",
+                username,
                 token
             })
         }

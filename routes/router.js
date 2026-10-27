@@ -19,6 +19,10 @@ router.post('/sign-up', controller.signUpPost);
 
 router.get('/log-in', controller.logInGet);
 
+router.get('/createPost', controller.createPostPost);
+
+
+
 export {
     router
 };

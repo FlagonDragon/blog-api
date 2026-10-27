@@ -32,12 +32,14 @@ async function getUser(username) {
   
 }
 
-async function createPost(title, content) {
+async function createPost(title, content, published, authorId) {
 
   const post = await prisma.post.create({
     data: {
       title: `${title}`,
       content: `${content}`,
+      published: `${published}`,
+      authorId: `${authorId}`,
     },
   });
 
@@ -53,12 +55,14 @@ async function getPosts() {
   
 }
 
-async function createComment(title, content) {
+async function createComment(title, content, authorId, postId) {
 
   const comment = await prisma.comment.create({
     data: {
       title: `${title}`,
       content: `${content}`,
+      authorId: `${authorId}`,
+      postId: `${postId}`,
     },
   });
 

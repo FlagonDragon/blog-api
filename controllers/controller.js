@@ -51,6 +51,28 @@ function userIdGet(req, res) {
 
 };
 
+async function createPostPost(req, res) {
+
+  const { title, content, published, authorId } = req.body;
+
+  try {
+
+    const { title, content, published, authorId } = req.body;
+
+    await db.createPost(title, content, published, authorId);
+
+  } catch(error) {
+
+    return res.status(500).send(error);
+
+  }
+
+  await db.createPost(title, content, published, authorId);
+
+  
+
+};
+
 async function postsGet(req, res) {
 
   const posts = await db.getPosts();
@@ -95,13 +117,17 @@ async function logInGet(req, res) {
 
 };
 
+
+
+
 export default {
     homeGet,
     infoGet,
     usersGet,
     userIdGet,
+    createPostPost,
     postsGet,
     postIdGet,
     signUpPost,
-    logInGet
+    logInGet,
 };
