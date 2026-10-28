@@ -55,9 +55,13 @@ async function postsGet(req, res) {
 
 };
 
-function postIdGet(req, res) {
+async function postIdGet(req, res) {
 
-  return res.send(users[req.params.userId]);
+  const { postId } = req.params;
+
+  const comments = await db.getComments(postId);
+
+  return res.send(comments);
 
 };
 

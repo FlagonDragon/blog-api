@@ -69,12 +69,23 @@ async function createComment(title, content, authorId, postId) {
   
 }
 
+async function getComments(postId) {
+
+  const comments = await prisma.comment.findMany({
+    where: { postId: Number(postId) },
+  });
+
+  return comments;
+  
+}
+
 export default {
   createUser,
   getUser,
   getData,
   createPost,
   getPosts,
-  createComment
+  createComment,
+  getComments
 };
 
