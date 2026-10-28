@@ -29,11 +29,11 @@ function userIdGet(req, res) {
 
 async function createPostPost(req, res) {
 
-  const { title, content, published, authorId } = req.body;
+  const { title, content, published, authorName } = req.body;
 
   try {
 
-    await db.createPost(title, content, published, authorId);
+    await db.createPost(title, content, published, authorName);
 
     return res.status(200);
 
@@ -67,11 +67,11 @@ async function postIdGet(req, res) {
 
 async function createCommentPost(req, res) {
 
-  const { content, authorId, postId } = req.body;
+  const { content, authorName, postId } = req.body;
 
   try {
 
-    await db.createPost(content, authorId, postId);
+    await db.createPost(content, authorName, postId);
 
     return res.status(200);
 
