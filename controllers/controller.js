@@ -71,9 +71,9 @@ async function createCommentPost(req, res) {
 
   try {
 
-    await db.createPost(content, authorName, postId);
+    await db.createComment(content, authorName, postId);    
 
-    return res.status(200);
+    res.status(200).json({ message: "Comment created succesfully!" })
 
   } catch(error) {
 

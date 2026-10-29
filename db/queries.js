@@ -59,9 +59,9 @@ async function createComment(content, authorName, postId) {
 
   const comment = await prisma.comment.create({
     data: {
-      content: `${content}`,
-      authorName: `${authorName}`,
-      postId: `${postId}`,
+      content: content,
+      authorName: authorName,
+      postId: Number(postId),
     },
   });
 
