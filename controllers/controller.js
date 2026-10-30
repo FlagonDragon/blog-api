@@ -35,7 +35,7 @@ async function createPostPost(req, res) {
 
     await db.createPost(title, content, published, authorName);
 
-    res.status(200).json({ message: "Comment created succesfully!" })
+    res.status(200).json({ message: "Post created succesfully!" })
 
   } catch(error) {
 
@@ -73,7 +73,7 @@ async function createCommentPost(req, res) {
 
     await db.createComment(content, authorName, postId);    
 
-    res.status(200).json({ message: "Comment created succesfully!" })
+    res.status(200).json({ message: "Comment created succesfully!" });
 
   } catch(error) {
 
@@ -97,9 +97,7 @@ async function signUpPost(req, res) {
 
   await db.createUser(username, hashedPassword);
 
-  res.redirect("/");
-
-  return res.send("all's well");
+  res.status(200).json({ message: "User created succesfully!" });
 
 };
 
