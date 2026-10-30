@@ -36,10 +36,10 @@ async function createPost(title, content, published, authorName) {
 
   const post = await prisma.post.create({
     data: {
-      title: `${title}`,
-      content: `${content}`,
-      published: `${published}`,
-      authorName: `${authorName}`,
+      title: title,
+      content: content,
+      published: published,
+      authorName: authorName,
     },
   });
 
