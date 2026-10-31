@@ -25,7 +25,7 @@ router.post('/createPost', passport.authenticate('jwt', { session: false }), con
 
 router.post('/createComment', passport.authenticate('jwt', { session: false }), controller.createCommentPost);
 
-router.post('/deleteComment', controller.deleteCommentPost);
+router.post('/deleteComment', passport.authenticate('jwt', { session: false }), controller.deleteCommentPost);
 
 router.get('/protected', passport.authenticate('jwt', { session: false }), controller.protectedGet);
 
