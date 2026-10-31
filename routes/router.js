@@ -23,7 +23,7 @@ router.post('/log-in', controller.logInPost);
 
 router.post('/createPost', controller.createPostPost);
 
-router.post('/createComment', controller.createCommentPost);
+router.post('/createComment', passport.authenticate('jwt', { session: false }), controller.createCommentPost);
 
 router.get('/protected', passport.authenticate('jwt', { session: false }), controller.protectedGet);
 
