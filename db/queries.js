@@ -55,6 +55,25 @@ async function getPosts() {
   
 }
 
+async function postStatus(postId, newStatus) {
+
+  console.log(postId);
+  console.log(newStatus);
+
+  if (newStatus == 'true') newStatus = true;
+  if (newStatus == 'false') newStatus = false;
+
+  await prisma.post.update({
+    where: { id: Number(postId) },
+    data: {
+      published: newStatus,
+    },
+  });
+
+  console.log('Post updated');
+  
+}
+
 async function createComment(content, authorName, postId) {
 
   const comment = await prisma.comment.create({
@@ -86,6 +105,8 @@ async function deleteComment(commentId) {
   await prisma.comment.delete({
     where: { id: Number(commentId) },
   });
+
+  console.log('Comment deleted');
  
 }
 
@@ -95,6 +116,7 @@ export default {
   getData,
   createPost,
   getPosts,
+  postStatus,
   createComment,
   getComments,
   deleteComment

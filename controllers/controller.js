@@ -56,6 +56,28 @@ async function postsGet(req, res) {
 
 };
 
+async function postStatusPost(req, res) {
+
+  const { postId, newStatus } = req.body;
+
+  try {
+
+    await db.postStatus(postId, newStatus);
+
+    res.status(200).json({ message: "Post edited succesfully!" })
+
+  } catch(error) {
+
+    return res.status(500).json({
+      error: error,
+      postId: postId,
+      newStatus: newStatus
+    });
+
+  }
+
+};
+
 async function postIdGet(req, res) {
 
   const { postId } = req.params;
@@ -181,6 +203,7 @@ export default {
   userIdGet,
   createPostPost,
   postsGet,
+  postStatusPost,
   postIdGet,
   createCommentPost,
   deleteCommentPost,

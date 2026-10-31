@@ -23,6 +23,8 @@ router.post('/log-in', controller.logInPost);
 
 router.post('/createPost', passport.authenticate('jwt', { session: false }), controller.createPostPost);
 
+router.post('/postStatus', passport.authenticate('jwt', { session: false }), controller.postStatusPost);
+
 router.post('/createComment', passport.authenticate('jwt', { session: false }), controller.createCommentPost);
 
 router.post('/deleteComment', passport.authenticate('jwt', { session: false }), controller.deleteCommentPost);
