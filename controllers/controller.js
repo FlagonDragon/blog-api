@@ -1,5 +1,6 @@
 import db from '../db/queries.js';
 import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken';
 
 function homeGet(req, res) {
 
@@ -109,18 +110,58 @@ async function logInGet(req, res) {
 
 };
 
+async function logInPost(req, res) {
+
+  let { username, password } = req.body;
+
+  const user = await db.getUser(username);
+
+  if (user != null && username === user.username) {
+
+    const match = await bcrypt.compare(password, user.password);
+
+    if (match) { 
+
+      const opts = {}
+      opts.expiresIn = 120;  //token expires in 2min
+      const secret = "SECRET_KEY" //normally stored in process.env.secret
+      const token = jwt.sign({ username }, secret, opts);
+
+      return res.status(200).json({
+        message: "Auth Passed",
+        username,
+        token
+      });
+
+    }
+  }
+  
+  return res.status(401).json({ message: "Auth Failed" });
+
+};
+
+async function protectedGet(req, res) {
+
+  return res.status(200).json({ 
+    message: "Accessed protected route succesfully!" 
+  });
+
+};
+
 
 
 
 export default {
-    homeGet,
-    infoGet,
-    usersGet,
-    userIdGet,
-    createPostPost,
-    postsGet,
-    postIdGet,
-    createCommentPost,
-    signUpPost,
-    logInGet,
+  homeGet,
+  infoGet,
+  usersGet,
+  userIdGet,
+  createPostPost,
+  postsGet,
+  postIdGet,
+  createCommentPost,
+  signUpPost,
+  logInGet,
+  logInPost,
+  protectedGet
 };

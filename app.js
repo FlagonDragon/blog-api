@@ -24,32 +24,32 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", router);
 
-app.post("/log-in", async (req, res) => {
-    let { username, password } = req.body;
+// app.post("/log-in", async (req, res) => {
+//     let { username, password } = req.body;
 
-    const user = await db.getUser(username);
+//     const user = await db.getUser(username);
 
-    if (user != null && username === user.username) {
-        const match = await bcrypt.compare(password, user.password);
-        if (match) { 
-            const opts = {}
-            opts.expiresIn = 120;  //token expires in 2min
-            const secret = "SECRET_KEY" //normally stored in process.env.secret
-            const token = jwt.sign({ username }, secret, opts);
-            return res.status(200).json({
-                message: "Auth Passed",
-                username,
-                token
-            })
-        }
-    }
+//     if (user != null && username === user.username) {
+//         const match = await bcrypt.compare(password, user.password);
+//         if (match) { 
+//             const opts = {}
+//             opts.expiresIn = 120;  //token expires in 2min
+//             const secret = "SECRET_KEY" //normally stored in process.env.secret
+//             const token = jwt.sign({ username }, secret, opts);
+//             return res.status(200).json({
+//                 message: "Auth Passed",
+//                 username,
+//                 token
+//             })
+//         }
+//     }
     
-    return res.status(401).json({ message: "Auth Failed" })
-});
+//     return res.status(401).json({ message: "Auth Failed" })
+// });
 
-app.get("/protected", passport.authenticate('jwt', { session: false }), (req, res) => {
-    return res.status(200).json({ message: "Accessed protected route succesfully!" })
-})
+// app.get("/protected", passport.authenticate('jwt', { session: false }), (req, res) => {
+//     return res.status(200).json({ message: "Accessed protected route succesfully!" })
+// })
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {
