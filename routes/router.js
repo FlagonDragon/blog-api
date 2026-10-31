@@ -21,9 +21,11 @@ router.post('/sign-up', controller.signUpPost);
 router.get('/log-in', controller.logInGet);
 router.post('/log-in', controller.logInPost);
 
-router.post('/createPost', controller.createPostPost);
+router.post('/createPost', passport.authenticate('jwt', { session: false }), controller.createPostPost);
 
 router.post('/createComment', passport.authenticate('jwt', { session: false }), controller.createCommentPost);
+
+router.post('/deleteComment', controller.deleteCommentPost);
 
 router.get('/protected', passport.authenticate('jwt', { session: false }), controller.protectedGet);
 

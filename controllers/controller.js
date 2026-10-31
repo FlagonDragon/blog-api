@@ -84,6 +84,29 @@ async function createCommentPost(req, res) {
 
 };
 
+async function deleteCommentPost(req, res) {
+
+  const { commentId } = req.body;
+
+  console.log(commentId);
+
+  try {
+
+    await db.deleteComment(commentId);    
+
+    res.status(200).json({ message: "Comment deleted succesfully!" });
+
+  } catch(error) {
+
+    return res.status(500).json({
+      error: error,
+      commentId: commentId
+    });
+
+  }
+
+};
+
 async function signUpPost(req, res) {
 
   const { username, password } = req.body;
@@ -160,6 +183,7 @@ export default {
   postsGet,
   postIdGet,
   createCommentPost,
+  deleteCommentPost,
   signUpPost,
   logInGet,
   logInPost,

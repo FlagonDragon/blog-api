@@ -79,6 +79,16 @@ async function getComments(postId) {
   
 }
 
+async function deleteComment(commentId) {
+
+  console.log(commentId);
+
+  await prisma.comment.delete({
+    where: { id: Number(commentId) },
+  });
+ 
+}
+
 export default {
   createUser,
   getUser,
@@ -86,6 +96,7 @@ export default {
   createPost,
   getPosts,
   createComment,
-  getComments
+  getComments,
+  deleteComment
 };
 
