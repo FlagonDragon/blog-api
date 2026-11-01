@@ -1,6 +1,8 @@
 import db from '../db/queries.js';
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
 function homeGet(req, res) {
 
@@ -168,8 +170,8 @@ async function logInPost(req, res) {
     if (match) { 
 
       const opts = {}
-      opts.expiresIn = 120;  //token expires in 2min
-      const secret = "SECRET_KEY" //normally stored in process.env.secret
+      opts.expiresIn = 120; 
+      const secret = process.env.SECRET
       const token = jwt.sign({ username }, secret, opts);
 
       return res.status(200).json({
