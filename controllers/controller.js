@@ -20,8 +20,12 @@ async function infoGet(req, res) {
 
 async function usersGet(req, res) {
 
-  return res.send(Object.values(users));
-  
+  const users = await db.getUsers();
+
+  console.log(users);
+
+  return res.send(users);
+ 
 };
 
 function userIdGet(req, res) {

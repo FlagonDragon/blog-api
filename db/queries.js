@@ -32,6 +32,14 @@ async function getUser(username) {
   
 }
 
+async function getUsers() {
+
+  const users = await prisma.user.findMany();
+
+  return users;
+  
+}
+
 async function createPost(title, content, published, authorName) {
 
   const post = await prisma.post.create({
@@ -113,6 +121,7 @@ async function deleteComment(commentId) {
 export default {
   createUser,
   getUser,
+  getUsers,
   getData,
   createPost,
   getPosts,
